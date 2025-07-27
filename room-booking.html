@@ -22,9 +22,34 @@
       margin-top: 40px;
       margin-bottom: 20px;
     }
+    .banner {
+      background: url('lobby.jpg') no-repeat center center/cover;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+    }
+    .banner h1 {
+      color: white;
+      font-size: 48px;
+      font-weight: bold;
+      z-index: 1;
+    }
   </style>
 </head>
 <body>
+
+<!-- Banner Section -->
+<section class="banner">
+  <h1>ROOMS & SUITES</h1>
+</section>
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
@@ -49,7 +74,7 @@
 <section class="container py-5">
   <h2 class="room-title">Room Types</h2>
   <div class="row g-4">
-    
+
     <!-- Standard Room -->
     <div class="col-md-4">
       <div class="card room-card shadow-sm">
@@ -57,7 +82,7 @@
         <div class="card-body">
           <h5 class="card-title">Standard Room</h5>
           <p class="card-text">Comfortable and budget-friendly. Ideal for short stays.</p>
-          <p><strong>Available Rooms:</strong> 6</p>
+          <p><strong>Available:</strong> 6 Rooms</p>
           <a href="login.html" class="btn btn-primary w-100">Book Now</a>
         </div>
       </div>
@@ -70,7 +95,7 @@
         <div class="card-body">
           <h5 class="card-title">Deluxe Room</h5>
           <p class="card-text">Spacious with premium features and elegant decor.</p>
-          <p><strong>Available Rooms:</strong> 6</p>
+          <p><strong>Available:</strong> 6 Rooms</p>
           <a href="login.html" class="btn btn-primary w-100">Book Now</a>
         </div>
       </div>
@@ -83,12 +108,56 @@
         <div class="card-body">
           <h5 class="card-title">Luxury Room</h5>
           <p class="card-text">Ultimate luxury experience for premium guests.</p>
-          <p><strong>Available Rooms:</strong> 8</p>
+          <p><strong>Available:</strong> 8 Rooms</p>
           <a href="login.html" class="btn btn-primary w-100">Book Now</a>
         </div>
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- Pricing Table -->
+<section class="container pb-5">
+  <h3 class="text-center mb-4">Room Pricing</h3>
+  <div class="table-responsive">
+    <table class="table table-bordered text-center">
+      <thead class="table-success">
+        <tr>
+          <th>Room Type</th>
+          <th>Single Occupancy</th>
+          <th>Double Occupancy</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Standard</td>
+          <td>₹ 5,000</td>
+          <td>₹ 1,500 / person</td>
+        </tr>
+        <tr>
+          <td>Deluxe</td>
+          <td>₹ 6,300</td>
+          <td>₹ 1,500 / person</td>
+        </tr>
+        <tr>
+          <td>Luxury</td>
+          <td>₹ 9,000</td>
+          <td>₹ 2,000 / person</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Room Notes -->
+  <div class="mt-4">
+    <ul>
+      <li>👤 Extra Guest: ₹800</li>
+      <li>🕓 24-Hour Check-out</li>
+      <li>☕ Includes complimentary breakfast at our 24-hour Coffee Lounge</li>
+      <li>💰 Taxes extra as applicable</li>
+      <li>📋 Terms & Conditions apply</li>
+    </ul>
   </div>
 </section>
 
