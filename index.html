@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dream Velvet - Home</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    body {
+      background-color: #fff;
+      color: #222;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background-color: #1a1a1a;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header h1 {
+      font-size: 26px;
+    }
+    nav a {
+      margin-left: 20px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    nav a:hover {
+      color: #f9d342;
+    }
+
+    .hero {
+      background-image: url('https://www.sheltongroup.in/assets/images/banner.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 90vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+    }
+
+    .hero-content h2 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .hero-content p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .hero-content button {
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      background-color: #f9d342;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .about-preview {
+      padding: 60px 50px;
+      background-color: #f4f4f4;
+      text-align: center;
+    }
+
+    .about-preview h3 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .about-preview p {
+      font-size: 18px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #1a1a1a;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Dream Velvet</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="room-booking.html">Rooms</a>
+      <a href="table-booking.html">Table</a>
+      <a href="login.html">Login</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Luxury Meets Comfort</h2>
+      <p>Welcome to Dream Velvet – your destination for a peaceful stay with premium facilities.</p>
+      <button onclick="goToBooking()">Book a Room</button>
+    </div>
+  </section>
+
+  <!-- About Preview Section -->
+  <section class="about-preview">
+    <h3>About Dream Velvet</h3>
+    <p>We offer 20 well-furnished rooms categorized into Standard, Deluxe, and Luxury segments. Whether you're here for work, vacation, or a short stay, we ensure a memorable experience.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Dream Velvet | All Rights Reserved
+  </footer>
+
+  <!-- Internal JavaScript -->
+  <script>
+    function goToBooking() {
+      window.location.href = 'room-booking.html';
+    }
+  </script>
+</body>
+</html>
