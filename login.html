@@ -137,31 +137,35 @@
 
         document.getElementById("toggleLink").addEventListener("click", updateFormMode);
 
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault();
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-            const email = emailField.value.trim();
-            const password = passwordField.value;
-            const name = nameField.value.trim();
-            const phone = phoneField.value.trim();
-            message.textContent = "";
+  const email = emailField.value.trim();
+  const password = passwordField.value;
+  const name = nameField.value.trim();
+  const phone = phoneField.value.trim();
+  message.textContent = "";
 
-            try {
-                if (isLogin) {
-                    await auth.signInWithEmailAndPassword(email, password);
-                    message.style.color = "green";
-                    message.textContent = "Login successful!";
-                } else {
-                    const result = await auth.createUserWithEmailAndPassword(email, password);
-                    await result.user.updateProfile({ displayName: name });
-                    message.style.color = "green";
-                    message.textContent = "Signup successful!";
-                }
-            } catch (err) {
-                message.style.color = "red";
-                message.textContent = err.message;
-            }
-        });
+  try {
+    if (isLogin) {
+      await auth.signInWithEmailAndPassword(email, password);
+      message.style.color = "green";
+      message.textContent = "Login successful!";
+      setTimeout(() => {
+        window.location.href = "userdashboard.html";
+      }, 1000); // 1-second delay before redirect
+    } else {
+      const result = await auth.createUserWithEmailAndPassword(email, password);
+      await result.user.updateProfile({ displayName: name });
+      message.style.color = "green";
+      message.textContent = "Signup successful!";
+    }
+  } catch (err) {
+    message.style.color = "red";
+    message.textContent = err.message;
+  }
+});
+
     </script>
 </body>
 
