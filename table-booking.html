@@ -1,126 +1,130 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>5-Star Hotel Management - Room Status</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f4f7f8;
-      margin: 40px;
-      color: #333;
-    }
-    h1 {
-      text-align: center;
-      color: #2a5d84;
-      margin-bottom: 30px;
-    }
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      max-width: 900px;
-      margin: 0 auto;
-      background: #fff;
-      box-shadow: 0 4px 8px rgba(42, 93, 132, 0.2);
-    }
-    th, td {
-      padding: 12px 20px;
-      text-align: center;
-      border-bottom: 1px solid #ddd;
-    }
-    th {
-      background-color: #2a5d84;
-      color: white;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-    tr:hover {
-      background-color: #e6f0fa;
-    }
-    .status-available {
-      color: green;
-      font-weight: bold;
-    }
-    .status-occupied {
-      color: red;
-      font-weight: bold;
-    }
-    .status-cleaning {
-      color: orange;
-      font-weight: bold;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Table Booking - Dream Velvet</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+    <div class="booking-container">
+        <h2>Reserve Your Table at Dream Velvet</h2>
+        <form action="/book_table" method="POST" onsubmit="return validateForm()">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
 
-  <h1>5-Star Hotel Room Management</h1>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Room Number</th>
-        <th>Room Type</th>
-        <th>Status</th>
-        <th>Price/Night ($)</th>
-        <th>Guest Name</th>
-      </tr>
-    </thead>
-    <tbody id="roomTableBody">
-      <!-- Rows will be inserted here dynamically -->
-    </tbody>
-  </table>
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}">
 
-  <script>
-    // Sample data for rooms
-    const rooms = [
-      { number: 101, type: "Deluxe Suite", status: "Available", price: 350, guest: "" },
-      { number: 102, type: "Presidential Suite", status: "Occupied", price: 1200, guest: "John Doe" },
-      { number: 103, type: "Standard Room", status: "Cleaning", price: 150, guest: "" },
-      { number: 104, type: "Deluxe Suite", status: "Occupied", price: 350, guest: "Jane Smith" },
-      { number: 105, type: "Standard Room", status: "Available", price: 150, guest: "" },
-      { number: 106, type: "Executive Suite", status: "Available", price: 600, guest: "" },
-      { number: 107, type: "Presidential Suite", status: "Cleaning", price: 1200, guest: "" },
-    ];
+            <label for="guests">Number of Guests:</label>
+            <input type="number" id="guests" name="guests" min="1" max="20" required>
 
-    function renderTable() {
-      const tbody = document.getElementById('roomTableBody');
-      tbody.innerHTML = ''; // Clear existing rows
+            <label for="date">Booking Date:</label>
+            <input type="date" id="date" name="date" required>
 
-      rooms.forEach(room => {
-        const tr = document.createElement('tr');
+            <label for="time">Time:</label>
+            <input type="time" id="time" name="time" required>
 
-        // Room Number
-        let td = document.createElement('td');
-        td.textContent = room.number;
-        tr.appendChild(td);
+            <label for="requests">Special Requests:</label>
+            <textarea id="requests" name="requests" rows="4"></textarea>
 
-        // Room Type
-        td = document.createElement('td');
-        td.textContent = room.type;
-        tr.appendChild(td);
+            <button type="submit">Book Table</button>
+        </form>
+    </div>
 
-        // Status with color class
-        td = document.createElement('td');
-        td.textContent = room.status;
-        td.classList.add(`status-${room.status.toLowerCase()}`);
-        tr.appendChild(td);
-
-        // Price per night
-        td = document.createElement('td');
-        td.textContent = room.price.toFixed(2);
-        tr.appendChild(td);
-
-        // Guest Name
-        td = document.createElement('td');
-        td.textContent = room.guest || '-';
-        tr.appendChild(td);
-
-        tbody.appendChild(tr);
-      });
-    }
-
-    renderTable();
-  </script>
+    <script>
+        function validateForm() {
+            const date = new Date(document.getElementById('date').value);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            if (date < today) {
+                alert("Please select a future date for booking.");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </body>
 </html>
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+
+.booking-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    width: 400px;
+}
+
+.booking-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2d2d2d;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    background-color: #2e8b57;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #256c48;
+}
+from flask import Flask, render_template, request, redirect, url_for, flash
+
+app = Flask(__name__)
+app.secret_key = 'supersecretkey'
+
+@app.route('/')
+def index():
+    return render_template('table_booking.html')
+
+@app.route('/book_table', methods=['POST'])
+def book_table():
+    name = request.form['name']
+    email = request.form['email']
+    phone = request.form['phone']
+    guests = request.form['guests']
+    date = request.form['date']
+    time = request.form['time']
+    requests = request.form['requests']
+
+    # You can save to database here
+    print(f"Booking received: {name}, {email}, {phone}, {guests}, {date}, {time}, {requests}")
+    
+    flash('Your table has been successfully booked! Thank you.')
+    return redirect(url_for('index'))
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
