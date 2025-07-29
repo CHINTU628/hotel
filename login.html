@@ -84,70 +84,68 @@
 
   <!-- Firebase Config and App Code -->
   <script>
-    // TODO: Replace with your own Firebase config
-    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_AUTH_DOMAIN",
-      projectId: "YOUR_PROJECT_ID",
-      appId: "YOUR_APP_ID"
-    };
-
+    // 🔐 Replace with your Firebase config from Firebase Console > Project Settings
+  const firebaseConfig = {
+  apiKey: "AIzaSyAT80QXTEwAgGnOB6N1lzpH-vdc98LoPfQ",
+  authDomain: "dreamvelvet-377e0.firebaseapp.com",
+  projectId: "dreamvelvet-377e0",
+  storageBucket: "dreamvelvet-377e0.firebasestorage.app",
+  messagingSenderId: "821302105933",
+  appId: "1:821302105933:web:bada4e32794a5fa35b8904"
+};
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
 
     const form = document.getElementById("authForm");
     const formTitle = document.getElementById("formTitle");
-    const toggleLink = document.getElementById("toggleLink");
-    const toggleText = document.getElementById("toggleText");
     const nameField = document.getElementById("name");
     const phoneField = document.getElementById("phone");
     const emailField = document.getElementById("email");
     const passwordField = document.getElementById("password");
     const submitBtn = document.getElementById("submitBtn");
     const message = document.getElementById("message");
+    const toggleText = document.getElementById("toggleText");
 
     let isLogin = true;
 
-    toggleLink.addEventListener("click", () => {
+    function updateFormMode() {
       isLogin = !isLogin;
-      if (isLogin) {
-        formTitle.textContent = "Login";
-        submitBtn.textContent = "Login";
-        toggleText.innerHTML = `Don't have an account? <a id="toggleLink">Sign up</a>`;
-        nameField.classList.add("hidden");
-        phoneField.classList.add("hidden");
-      } else {
-        formTitle.textContent = "Sign Up";
-        submitBtn.textContent = "Sign Up";
-        toggleText.innerHTML = `Already have an account? <a id="toggleLink">Login</a>`;
-        nameField.classList.remove("hidden");
-        phoneField.classList.remove("hidden");
-      }
 
-      // Rebind toggle after replacing innerHTML
-      document.getElementById("toggleLink").addEventListener("click", toggleLink.click);
-    });
+      formTitle.textContent = isLogin ? "Login" : "Sign Up";
+      submitBtn.textContent = isLogin ? "Login" : "Sign Up";
+      nameField.classList.toggle("hidden", isLogin);
+      phoneField.classList.toggle("hidden", isLogin);
+
+      toggleText.innerHTML = isLogin
+        ? `Don't have an account? <a id="toggleLink">Sign up</a>`
+        : `Already have an account? <a id="toggleLink">Login</a>`;
+
+      // Re-bind event listener to new link
+      document.getElementById("toggleLink").addEventListener("click", updateFormMode);
+    }
+
+    // Initial toggle setup
+    document.getElementById("toggleLink").addEventListener("click", updateFormMode);
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+
       const email = emailField.value.trim();
       const password = passwordField.value;
       const name = nameField.value.trim();
       const phone = phoneField.value.trim();
-
       message.textContent = "";
 
       try {
         if (isLogin) {
           await auth.signInWithEmailAndPassword(email, password);
           message.style.color = "green";
-          message.textContent = "Logged in successfully!";
+          message.textContent = "Login successful!";
         } else {
           const result = await auth.createUserWithEmailAndPassword(email, password);
           await result.user.updateProfile({ displayName: name });
           message.style.color = "green";
-          message.textContent = "Account created!";
-          // You can optionally store phone number in Firestore here
+          message.textContent = "Signup successful!";
         }
       } catch (err) {
         message.style.color = "red";
