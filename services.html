@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Services - Dream Velvet Hotel</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #222;
+        }
+
+        nav {
+            text-align: center;
+            padding: 10px;
+            background: #eee;
+            font-size: 14px;
+        }
+
+        .breadcrumb {
+            color: #888;
+        }
+
+        .services-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .service-box {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .service-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-box i {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #2b8ec7;
+        }
+
+        .service-box p {
+            margin: 10px 0 0;
+            font-weight: 500;
+        }
+
+        footer {
+            background-color: #222;
+            color: #ccc;
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .service-box {
+                padding: 20px;
+            }
+        }
+    </style>
+    <!-- Font Awesome Icons (Optional) -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <header>
+        <h1>DREAM VELVET HOTEL</h1>
+    </header>
+
+    <nav class="breadcrumb">
+        Home » Services
+    </nav>
+
+    <section class="services-container">
+        <div class="service-box">
+            <i class="fas fa-clock"></i>
+            <p>24 Hour Check Out</p>
+        </div>
+        <div class="service-box">
+            <i class="fas fa-snowflake"></i>
+            <p>Central AC</p>
+        </div>
+        <div class="service-box">
+            <i class="fas fa-plane"></i>
+            <p>Travel Desk</p>
+        </div>
+        <div class="service-box">
+            <i class="fas fa-credit-card"></i>
+            <p>Credit Card Facility</p>
+        </div>
+        <div class="service-box">
+            <i class="fas fa-user-md"></i>
+            <p>Doctor on Call</p>
+        </div>
+        <div class="service-box">
+            <i class="fas fa-wifi"></i>
+            <p>Wi-Fi Connectivity</p>
+        </div>
+        <div class="service-box">
+            <i class="fas fa-tshirt"></i>
+            <p>In-house Laundry</p>
+        </div>
+        <div class="service-box">
+            <i class="fas fa-parking"></i>
+            <p>Valet Parking</p>
+        </div>
+        <div class="service-box">
+            <i class="fas fa-spa"></i>
+            <p>Spa & Massage</p>
+        </div>
+        <div class="service-box">
+            <i class="fas fa-dumbbell"></i>
+            <p>Gym</p>
+        </div>
+        <div class="service-box">
+            <i class="fas fa-utensils"></i>
+            <p>Take Away</p>
+        </div>
+        <div class="service-box">
+            <i class="fas fa-bed"></i>
+            <p>Free Drivers Accommodation</p>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2025 Dream Velvet Hotel. All rights reserved.<br>
+        Designed by Dream Velvet Web Team
+    </footer>
+
+</body>
+</html>
