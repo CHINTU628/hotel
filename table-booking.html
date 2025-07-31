@@ -2,123 +2,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DreamVelvet Hotel Table Booking</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #fafafa;
-      margin: 0;
-      padding: 20px;
-    }
-
-    .container {
-      max-width: 700px;
-      margin: auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    h1 {
-      text-align: center;
-      color: #4b2e83;
-    }
-
-    .gallery {
-      display: flex;
-      justify-content: space-around;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    .gallery img {
-      width: 30%;
-      border-radius: 8px;
-      margin: 5px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    input, button {
-      padding: 10px;
-      font-size: 16px;
-    }
-
-    button {
-      background-color: #4b2e83;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #372161;
-    }
-
-    #statusMessage {
-      margin-top: 15px;
-      font-weight: bold;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Table Booking - DreamVelvet Hotel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #800080;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+        h2 {
+            color: #800080;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+            margin-bottom: 30px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #aaa;
+            border-radius: 6px;
+        }
+        button {
+            background-color: #800080;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #5a005a;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .gallery img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 0 5px #aaa;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>DreamVelvet Hotel Table Booking</h1>
 
-    <!-- Table Images (You can replace with real image URLs) -->
-    <div class="gallery">
-      <img src="https://via.placeholder.com/200x150?text=Table+1" alt="Table 1" />
-      <img src="https://via.placeholder.com/200x150?text=Table+2" alt="Table 2" />
-      <img src="https://via.placeholder.com/200x150?text=Table+3" alt="Table 3" />
-    </div>
+<header>
+    <h1>DreamVelvet Hotel - Table Booking</h1>
+</header>
 
-    <!-- Booking Form -->
+<div class="container">
+    <h2>Book a Table</h2>
     <form id="bookingForm">
-      <input type="text" id="name" placeholder="Your Name" required />
-      <input type="date" id="date" required />
-      <input type="time" id="time" required />
-      <input type="number" id="guests" placeholder="No. of Guests" required min="1" />
-      <button type="submit">Book Table</button>
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" required>
+
+        <label for="date">Booking Date:</label>
+        <input type="date" id="date" required>
+
+        <label for="time">Time:</label>
+        <input type="time" id="time" required>
+
+        <label for="guests">Number of Guests:</label>
+        <select id="guests" required>
+            <option value="">Select</option>
+            <option value="2">2</option>
+            <option value="4">4</option>
+            <option value="6">6</option>
+            <option value="8+">8+</option>
+        </select>
+
+        <label for="payment">Advance Payment (₹):</label>
+        <input type="number" id="payment" required>
+
+        <button type="submit">Book Now</button>
+        <button type="button" onclick="cancelBooking()">Cancel Booking & Refund</button>
     </form>
 
-    <p id="statusMessage"></p>
-  </div>
+    <h2>Table Styles at DreamVelvet</h2>
+    <div class="gallery">
+        <img src="https://i.imgur.com/NKZ5j94.jpg" alt="Luxury Table Setup">
+        <img src="https://i.imgur.com/jVg5zpg.jpg" alt="Deluxe Dining">
+        <img src="https://i.imgur.com/mvEL8Je.jpg" alt="Outdoor View">
+        <img src="https://i.imgur.com/NZVXAVp.jpg" alt="Romantic Setup">
+    </div>
+</div>
 
-  <script>
-    document.getElementById("bookingForm").addEventListener("submit", function (e) {
-      e.preventDefault();
+<script>
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const amount = document.getElementById('payment').value;
 
-      const name = document.getElementById("name").value;
-      const date = document.getElementById("date").value;
-      const time = document.getElementById("time").value;
-      const guests = document.getElementById("guests").value;
-
-      const statusMsg = document.getElementById("statusMessage");
-
-      // Simulate table availability (Random logic)
-      const isAvailable = Math.random() < 0.7; // 70% chance of success
-
-      if (isAvailable) {
-        statusMsg.style.color = "green";
-        statusMsg.textContent = `Hi ${name}, your table for ${guests} guests on ${date} at ${time} is booked successfully!`;
-      } else {
-        statusMsg.style.color = "red";
-        statusMsg.textContent = `Sorry ${name}, no table available at that time. Initiating refund... 💸`;
-
-        // Simulated refund process
-        setTimeout(() => {
-          alert("Refund processed successfully to your original payment method.");
-        }, 2000);
-      }
+        alert(`Thank you, ${name}! Your table has been booked.\nAmount Paid: ₹${amount}`);
+        // Here you can connect to your backend using fetch/AJAX
     });
-  </script>
+
+    function cancelBooking() {
+        const name = document.getElementById('name').value;
+        const amount = document.getElementById('payment').value;
+
+        if (!name || !amount) {
+            alert("Please fill in your booking details first!");
+        } else {
+            alert(`Dear ${name}, your booking has been cancelled.\n₹${amount} will be refunded to your account.`);
+            // Clear the form
+            document.getElementById('bookingForm').reset();
+        }
+    }
+</script>
+
 </body>
 </html>
