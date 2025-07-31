@@ -169,11 +169,15 @@
 
   function logoutUser() {
     auth.signOut().then(() => {
-      localStorage.removeItem("isLoggedIn"); // Clear login flag (used for navbar switch)
       window.location.href = "login.html";
-    }).catch(error => {
-      console.error("Logout failed:", error);
     });
+  }
+</script>
+<button onclick="logout()">Logout</button>
+<script>
+  function logout() {
+    localStorage.removeItem("isLoggedIn");
+    window.location.href = "index.html";
   }
 </script>
 
