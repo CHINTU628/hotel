@@ -163,18 +163,21 @@
       }
 
     } else {
-      // If not logged in, redirect to login
-      window.location.href = "login.html";
+      window.location.href = "login.html"; // Redirect if not logged in
     }
   });
 
   function logoutUser() {
     auth.signOut().then(() => {
-      localStorage.removeItem("isLoggedIn");  // Clean up local storage if used
-      window.location.href = "login.html";    // Redirect to login after logout
-    }).catch((error) => {
-      console.error("Error during logout:", error);
+      window.location.href = "login.html";
     });
+  }
+</script>
+<button onclick="logout()">Logout</button>
+<script>
+  function logout() {
+    localStorage.removeItem("isLoggedIn");
+    window.location.href = "index.html";
   }
 </script>
 
