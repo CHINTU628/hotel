@@ -109,7 +109,7 @@
     <div class="card">
       <h3>Table Reservation</h3>
       <p>Reserve a table in our 5-star restaurant.</p>
-      <button onclick="location.href='tablebooking.html'">Reserve</button>
+      <button onclick="location.href='table-booking.html'">Reserve</button>
     </div>
     <div class="card">
       <h3>View Profile</h3>
@@ -163,21 +163,16 @@
       }
 
     } else {
-      window.location.href = "login.html"; // Redirect if not logged in
+      // Not logged in - redirect to login page
+      window.location.href = "login.html";
     }
   });
 
   function logoutUser() {
     auth.signOut().then(() => {
+      localStorage.removeItem("isLoggedIn"); // optional if used in navbar
       window.location.href = "login.html";
     });
-  }
-</script>
-<button onclick="logout()">Logout</button>
-<script>
-  function logout() {
-    localStorage.removeItem("isLoggedIn");
-    window.location.href = "index.html";
   }
 </script>
 
