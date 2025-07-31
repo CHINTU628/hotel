@@ -52,7 +52,7 @@
 </head>
 <body>
 
-  <!-- Navbar -->
+  <!-- ✅ Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container">
       <a class="navbar-brand" href="#">Dream Velvet</a>
@@ -66,7 +66,7 @@
           <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
           <li class="nav-item"><a href="room-booking.html" class="nav-link">Rooms</a></li>
           <li class="nav-item"><a href="table-booking.html" class="nav-link">Table</a></li>
-          <!-- Dynamic login/dashboard link will be added by JS -->
+          <!-- Login/User Dashboard will be injected here -->
         </ul>
       </div>
     </div>
@@ -86,27 +86,28 @@
     <p>&copy; 2025 Dream Velvet | Designed by You</p>
   </footer>
 
-  <!-- Bootstrap & FontAwesome -->
+  <!-- Bootstrap & Icons -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://kit.fontawesome.com/4e7d82e76a.js" crossorigin="anonymous"></script>
 
-  <!-- Login/Dashboard Toggle Script -->
+  <!-- ✅ Dynamic Login/User Dashboard Script -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const navLinks = document.getElementById("nav-links");
       const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
-      const li = document.createElement('li');
-      li.className = 'nav-item';
+      const loginOrDashboardItem = document.createElement('li');
+      loginOrDashboardItem.className = 'nav-item';
 
       if (isLoggedIn) {
-        li.innerHTML = `<a href="userdashboard.html" class="nav-link">User Dashboard</a>`;
+        loginOrDashboardItem.innerHTML = `<a href="userdashboard.html" class="nav-link">User Dashboard</a>`;
       } else {
-        li.innerHTML = `<a href="login.html" class="nav-link">Login</a>`;
+        loginOrDashboardItem.innerHTML = `<a href="login.html" class="nav-link">Login</a>`;
       }
 
-      navLinks.appendChild(li);
+      navLinks.appendChild(loginOrDashboardItem);
     });
   </script>
+
 </body>
 </html>
