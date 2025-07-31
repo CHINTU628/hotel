@@ -34,8 +34,10 @@
       text-decoration: none;
       font-weight: bold;
     }
-
-    .container {
+    .container{
+      height:10px;
+    }
+    .container1 {
       padding: 40px;
       max-width: 900px;
       margin: auto;
@@ -70,18 +72,30 @@
 <body>
 
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="categories.html">Rooms</a>
-    <a href="booking.html">Book Now</a>
-    <a href="about.html">About Us</a>
-    <a href="contact.html">Contact</a>
+   <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Dream Velvet</a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="navbarNav" class="collapse navbar-collapse justify-content-end">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
+          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+          <li class="nav item"><a href="services.html" class="nav-link">Services</a></li>
+          <li class="nav-item"><a href="room-booking.html" class="nav-link">Rooms</a></li>
+          <li class="nav-item"><a href="table-booking.html" class="nav-link">Table</a></li>
+        
+        </ul>
+      </div>
+    </div>
   </nav>
   <div class="info">
     <h1>Dream Velvet Hotel</h1>
     <p>Your Dream Stay, Our Velvet Touch</p>
   </div>
-  <div class="container">
+  <div class="container1">
     <h2>About Us</h2>
     <p>Welcome to <strong>Dream Velvet</strong>, your luxurious destination for comfort, elegance, and unforgettable experiences. Situated in the heart of the city, our hotel offers world-class accommodation for business travelers, families, and tourists alike.</p>
 
