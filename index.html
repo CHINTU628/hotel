@@ -150,25 +150,17 @@
 </head>
 <body>
   <header>  
-     <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">Dream Velvet</a>
-      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div id="navbarNav" class="collapse navbar-collapse justify-content-end">
-        <ul class="navbar-nav">
-          <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
-          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-          <li class="nav item"><a href="services.html" class="nav-link">Services</a></li>
-          <li class="nav-item"><a href="room-booking.html" class="nav-link">Rooms</a></li>
-          <li class="nav-item"><a href="table-booking.html" class="nav-link">Table</a></li>
-        
-        </ul>
-      </div>
-    </div>
-  </nav>
+   <ul class="navbar-nav" id="navbarLinks">
+  <li class="nav-item"><a href="#" class="nav-link" onclick="showSection('home')">Home</a></li>
+  <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+  <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+  <li class="nav-item"><a href="room-booking.html" class="nav-link">Rooms</a></li>
+  <li class="nav-item"><a href="table-booking.html" class="nav-link">Table</a></li>
+  <li class="nav-item" id="authLink">
+    <a href="#" class="nav-link" onclick="showSection('login')">Login</a>
+  </li>
+</ul>
+
   </header>
   
   <!-- 🔐 LOGIN SECTION -->
