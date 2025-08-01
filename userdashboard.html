@@ -17,6 +17,11 @@
       padding: 1em;
       text-align: center;
     }
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+    }
 
     .dashboard {
       max-width: 1000px;
@@ -91,7 +96,12 @@
 <body>
 
 <header>
-  <h1>Welcome to Dream Velvet</h1>
+  <nav id="navbar">
+      <a href="index.html" onclick="showSection('home')">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="room-booking.html" class="nav-link">Rooms</a>
+      <a href="table-booking.html" class="nav-link">Table</a></nav>
 </header>
 
 <div class="dashboard">
@@ -173,9 +183,6 @@
     });
   }
 </script>
-<button onclick="logout()">Logout</button>
-<script>
-  
 
 </body>
 </html>
