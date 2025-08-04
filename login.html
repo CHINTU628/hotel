@@ -151,10 +151,14 @@
       try {
         if (isLogin) {
           await auth.signInWithEmailAndPassword(email, password);
+          
+          // ✅ Set login status in localStorage
+          localStorage.setItem("isLoggedIn", "true");
+
           message.style.color = "green";
           message.textContent = "Login successful!";
           setTimeout(() => {
-            window.location.href = "userdashboard.html";
+            window.location.href = "index.html";
           }, 1000);
         } else {
           const result = await auth.createUserWithEmailAndPassword(email, password);
@@ -176,7 +180,5 @@
       }
     });
   </script>
-
-
 </body>
 </html>
