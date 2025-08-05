@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Order Now - Dream Velvet</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f9f9f9;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .category-card {
+      border: 3px solid #935116;
+      border-radius: 10px;
+      margin: 20px 0;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .category-card:hover {
+      box-shadow: 0 0 10px #888;
+    }
+    .category-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px 10px 0 0;
+    }
+    .category-title {
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+      background: #fff;
+    }
+    .menu-section {
+      display: none;
+      margin-top: 30px;
+    }
+    .menu-item {
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container mt-4">
+    <h1 class="text-center mb-4">ORDER NOW</h1>
+
+    <!-- Categories -->
+    <div class="category-card" onclick="showMenu('combos')">
+      <img src="combo.jpg" alt="Combos">
+      <div class="category-title">COMBOS</div>
+    </div>
+
+    <div class="category-card" onclick="showMenu('veg')">
+      <img src="veg.jpg" alt="Veg">
+      <div class="category-title">VEG</div>
+    </div>
+
+    <div class="category-card" onclick="showMenu('nonveg')">
+      <img src="nonveg.jpg" alt="Non Veg">
+      <div class="category-title">NON VEG</div>
+    </div>
+
+    <!-- Menu Items -->
+    <div id="combos" class="menu-section">
+      <h3>Combo Items</h3>
+      <div class="menu-item">🍗 Chicken Wings Combo - ₹299</div>
+      <div class="menu-item">🍔 Burger + Fries + Drink - ₹249</div>
+      <div class="menu-item">🌮 Wrap + Nuggets + Coke - ₹199</div>
+    </div>
+
+    <div id="veg" class="menu-section">
+      <h3>Veg Items</h3>
+      <div class="menu-item">🥗 Veg Biryani - ₹199</div>
+      <div class="menu-item">🍛 Paneer Butter Masala - ₹220</div>
+      <div class="menu-item">🍲 Veg Kurma - ₹180</div>
+    </div>
+
+    <div id="nonveg" class="menu-section">
+      <h3>Non-Veg Items</h3>
+      <div class="menu-item">🍗 Chicken Biryani - ₹249</div>
+      <div class="menu-item">🥘 Mutton Rogan Josh - ₹299</div>
+      <div class="menu-item">🍖 Fish Fry - ₹270</div>
+    </div>
+  </div>
+
+  <script>
+    function showMenu(category) {
+      const sections = document.querySelectorAll('.menu-section');
+      sections.forEach(sec => sec.style.display = 'none');
+      document.getElementById(category).style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
