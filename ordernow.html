@@ -16,14 +16,16 @@
       margin: 20px 0;
       cursor: pointer;
       transition: 0.3s;
+      overflow: hidden;
     }
     .category-card:hover {
       box-shadow: 0 0 10px #888;
+      transform: scale(1.02);
     }
     .category-card img {
       width: 100%;
-      height: auto;
-      border-radius: 10px 10px 0 0;
+      height: 220px;
+      object-fit: cover;
     }
     .category-title {
       text-align: center;
@@ -50,22 +52,46 @@
     <h1 class="text-center mb-4">ORDER NOW</h1>
 
     <!-- Categories -->
+    <div class="category-card" onclick="showMenu('rice')">
+      <img src="https://thumbs.dreamstime.com/b/indian-food-thali-top-view-86525537.jpg" alt="Rice & Noodles">
+      <div class="category-title">RICE, NOODLES & INDIAN BREAD</div>
+    </div>
+
+    <div class="category-card" onclick="showMenu('beverages')">
+      <img src="https://thumbs.dreamstime.com/b/colorful-cocktails-123456.jpg" alt="Hot & Cold Beverages">
+      <div class="category-title">HOT & COLD BEVERAGES</div>
+    </div>
+
     <div class="category-card" onclick="showMenu('combos')">
-      <img src="combo.jpg" alt="Combos">
+      <img src="https://thumbs.dreamstime.com/b/fried-chicken-fries-combo-123456.jpg" alt="Combos">
       <div class="category-title">COMBOS</div>
     </div>
 
     <div class="category-card" onclick="showMenu('veg')">
-      <img src="veg.jpg" alt="Veg">
+      <img src="https://thumbs.dreamstime.com/b/vegetarian-curry-plate-top-view-123456.jpg" alt="Veg">
       <div class="category-title">VEG</div>
     </div>
 
     <div class="category-card" onclick="showMenu('nonveg')">
-      <img src="nonveg.jpg" alt="Non Veg">
+      <img src="https://thumbs.dreamstime.com/b/mutton-curry-top-view-123456.jpg" alt="Non Veg">
       <div class="category-title">NON VEG</div>
     </div>
 
     <!-- Menu Items -->
+    <div id="rice" class="menu-section">
+      <h3>Rice, Noodles & Indian Bread</h3>
+      <div class="menu-item">🍚 Veg Fried Rice - ₹180</div>
+      <div class="menu-item">🍜 Chicken Noodles - ₹220</div>
+      <div class="menu-item">🥙 Butter Naan with Curry - ₹150</div>
+    </div>
+
+    <div id="beverages" class="menu-section">
+      <h3>Hot & Cold Beverages</h3>
+      <div class="menu-item">🥤 Cold Coffee - ₹120</div>
+      <div class="menu-item">🍹 Fresh Lime Soda - ₹80</div>
+      <div class="menu-item">☕ Cappuccino - ₹150</div>
+    </div>
+
     <div id="combos" class="menu-section">
       <h3>Combo Items</h3>
       <div class="menu-item">🍗 Chicken Wings Combo - ₹299</div>
