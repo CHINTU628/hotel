@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,12 +24,14 @@
       color: white;
       position: relative;
     }
+
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
       background: rgba(0, 0, 0, 0.5);
     }
+
     .hero h1 {
       position: relative;
       z-index: 1;
@@ -46,24 +49,30 @@
       border-radius: 10px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     }
+
     .booking-section h2 {
       color: #800080;
       font-weight: bold;
       margin-bottom: 20px;
       text-align: center;
     }
-    .form-control, .form-select {
+
+    .form-control,
+    .form-select {
       border-radius: 6px;
       border: 1px solid #ccc;
     }
+
     .btn-primary {
       background-color: #800080;
       border: none;
       font-weight: bold;
     }
+
     .btn-primary:hover {
       background-color: #5a005a;
     }
+
     .btn-outline-danger {
       font-weight: bold;
     }
@@ -72,16 +81,19 @@
     .gallery {
       margin-top: 50px;
     }
+
     .gallery img {
       border-radius: 10px;
       box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s ease;
     }
+
     .gallery img:hover {
       transform: scale(1.05);
     }
   </style>
 </head>
+
 <body>
 
   <!-- Navbar -->
@@ -98,6 +110,8 @@
           <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
           <li class="nav-item"><a href="room-booking.html" class="nav-link">Rooms</a></li>
           <li class="nav-item"><a href="table-booking.html" class="nav-link active">Table</a></li>
+          <li class="nav-item"><a href="ordernow.html" class="nav-link">Order Now</a></li>
+
         </ul>
       </div>
     </div>
@@ -159,7 +173,7 @@
   </section>
 
   <script>
-    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+    document.getElementById('bookingForm').addEventListener('submit', function (e) {
       e.preventDefault();
       const name = document.getElementById('name').value;
       const amount = document.getElementById('payment').value;
@@ -179,4 +193,5 @@
   </script>
 
 </body>
+
 </html>
