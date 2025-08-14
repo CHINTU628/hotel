@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Veg Dishes - Dream Velvet</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f9f9f9;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    /* Hero Section */
+    .hero {
+      background: url('https://images.unsplash.com/photo-1604908176997-885bbba9076e') no-repeat center center/cover;
+      height: 40vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    .hero h1 {
+      position: relative;
+      z-index: 1;
+      font-size: 3rem;
+      font-weight: bold;
+    }
+
+    /* Product Cards */
+    .product-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      text-align: center;
+      position: relative;
+      transition: transform 0.3s;
+    }
+    .product-card:hover {
+      transform: scale(1.03);
+    }
+    .price-tag {
+      position: absolute;
+      top: 10px;
+      left: 0;
+      background: green;
+      color: white;
+      padding: 5px 15px;
+      font-weight: bold;
+      border-radius: 0 20px 20px 0;
+    }
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .product-name {
+      padding: 10px;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+    .btn-add {
+      background: #FFD700;
+      border: none;
+      padding: 8px 15px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      cursor: pointer;
+    }
+    .btn-add:hover {
+      background: #e6c200;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Hero Section -->
+<section class="hero">
+  <h1>Vegetarian Delights</h1>
+</section>
+
+<!-- Veg Dishes List -->
+<div class="container py-4">
+  <div class="row g-4">
+
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹249</div>
+        <img src="https://www.sheltongroup.in/uploads/products/ello/d3ca66d9790f36069610547d76a1f323.png" alt="Paneer Butter Masala">
+        <div class="product-name">Paneer Butter Masala</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹229</div>
+        <img src="https://www.sheltongroup.in/uploads/products/ello/1ad7ae547056db4b0b0ae488aa6c5ad6.png" alt="Palak Paneer">
+        <div class="product-name">Palak Paneer</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹239</div>
+        <img src="https://www.sheltongroup.in/uploads/products/ello/4b9db7132b51f4ce2c4944434b9955e0.png" alt="Mushroom Masala">
+        <div class="product-name">Mushroom Masala</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹219</div>
+        <img src="https://www.sheltongroup.in/uploads/products/ello/ebd34cd3d99dae59d24dd54af40f521c.png" alt="Tomato Cashew Curry">
+        <div class="product-name">Tomato Cashew Curry</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹199</div>
+        <img src="https://www.sheltongroup.in/uploads/products/ello/abf028f4dca782317b182fcd09a1f861.png" alt="Mix Veg Curry">
+        <div class="product-name">Mix Veg Curry</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹249</div>
+        <img src="https://www.sheltongroup.in/uploads/products/ello/a47b6889af96359cc994313f4e62a082.jpg" alt="Mushroom Manchurian">
+        <div class="product-name">Mushroom Manchurian</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹239</div>
+        <img src="https://www.sheltongroup.in/uploads/products/ello/6646633294ec1de90c2e022b661fefa4.jpg" alt="Vegetable Kofta Curry">
+        <div class="product-name">Vegetable Kofta Curry</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹189</div>
+        <img src="https://www.sheltongroup.in/uploads/products/ello/40430db90989303a9561db7365ba4480.jpg" alt="Dal Palak">
+        <div class="product-name">Dal Palak</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
