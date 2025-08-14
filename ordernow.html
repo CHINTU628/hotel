@@ -17,6 +17,9 @@
       cursor: pointer;
       transition: 0.3s;
       overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: block;
     }
     .category-card:hover {
       box-shadow: 0 0 10px #888;
@@ -33,17 +36,6 @@
       font-weight: bold;
       background: #fff;
     }
-    .menu-section {
-      display: none;
-      margin-top: 30px;
-    }
-    .menu-item {
-      background: #fff;
-      border: 1px solid #ddd;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 15px;
-    }
   </style>
 </head>
 <body>
@@ -51,65 +43,28 @@
   <div class="container mt-4">
     <h1 class="text-center mb-4">ORDER NOW</h1>
 
-    <!-- Categories -->
-
-    <div class="category-card" onclick="showMenu('beverages')">
+    <!-- Categories with links to separate pages -->
+    <a href="beverages.html" class="category-card">
       <img src="hot&cold.png" alt="Hot & Cold Beverages">
       <div class="category-title">HOT & COLD BEVERAGES</div>
-    </div>
+    </a>
 
-    <div class="category-card" onclick="showMenu('combos')">
+    <a href="combos.html" class="category-card">
       <img src="combos.jpg" alt="Combos">
       <div class="category-title">COMBOS</div>
-    </div>
+    </a>
 
-    <div class="category-card" onclick="showMenu('veg')">
+    <a href="veg.html" class="category-card">
       <img src="veg.png" alt="Veg">
       <div class="category-title">VEG</div>
-    </div>
+    </a>
 
-    <div class="category-card" onclick="showMenu('nonveg')">
+    <a href="nonveg.html" class="category-card">
       <img src="nonveg.png" alt="Non Veg">
       <div class="category-title">NON VEG</div>
-    </div>
+    </a>
 
-    <!-- Menu Items -->
-
-    <div id="beverages" class="menu-section">
-      <h3>Hot & Cold Beverages</h3>
-      <div class="menu-item">🥤 Cold Coffee - ₹120</div>
-      <div class="menu-item">🍹 Fresh Lime Soda - ₹80</div>
-      <div class="menu-item">☕ Cappuccino - ₹150</div>
-    </div>
-
-    <div id="combos" class="menu-section">
-      <h3>Combo Items</h3>
-      <div class="menu-item">🍗 Chicken Wings Combo - ₹299</div>
-      <div class="menu-item">🍔 Burger + Fries + Drink - ₹249</div>
-      <div class="menu-item">🌮 Wrap + Nuggets + Coke - ₹199</div>
-    </div>
-
-    <div id="veg" class="menu-section">
-      <h3>Veg Items</h3>
-      <div class="menu-item">🥗 Veg Biryani - ₹199</div>
-      <div class="menu-item">🍛 Paneer Butter Masala - ₹220</div>
-      <div class="menu-item">🍲 Veg Kurma - ₹180</div>
-    </div>
-
-    <div id="nonveg" class="menu-section">
-      <h3>Non-Veg Items</h3>
-      <div class="menu-item">🍗 Chicken Biryani - ₹249</div>
-      <div class="menu-item">🥘 Mutton Rogan Josh - ₹299</div>
-      <div class="menu-item">🍖 Fish Fry - ₹270</div>
-    </div>
   </div>
 
-  <script>
-    function showMenu(category) {
-      const sections = document.querySelectorAll('.menu-section');
-      sections.forEach(sec => sec.style.display = 'none');
-      document.getElementById(category).style.display = 'block';
-    }
-  </script>
 </body>
 </html>
