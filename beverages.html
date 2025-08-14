@@ -10,6 +10,28 @@
       background-color: #f9f9f9;
       font-family: 'Segoe UI', sans-serif;
     }
+    /* Hero Section */
+    .hero {
+      background: url('https://i.imgur.com/8FkEJAB.jpg') no-repeat center center/cover;
+      height: 40vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    .hero h1 {
+      color: white;
+      font-size: 2.8rem;
+      font-weight: bold;
+      z-index: 1;
+    }
+    /* Product Cards */
     .product-card {
       background: white;
       border-radius: 10px;
@@ -57,8 +79,12 @@
 </head>
 <body>
 
+<!-- Hero Section -->
+<section class="hero">
+  <h1>Hot & Cold Beverages</h1>
+</section>
+
 <div class="container py-4">
-  <h1 class="text-center mb-4">Hot & Cold Beverages</h1>
   <div class="row g-4">
 
     <div class="col-md-3 col-sm-6">
@@ -72,7 +98,25 @@
 
     <div class="col-md-3 col-sm-6">
       <div class="product-card">
-        <div class="price-tag">₹80</div>
+        <div class="price-tag">₹150</div>
+        <img src="https://i.imgur.com/0o8uF3y.jpg" alt="Coffee">
+        <div class="product-name">Coffee</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹130</div>
+        <img src="https://i.imgur.com/vcPcxte.jpg" alt="Tea">
+        <div class="product-name">Tea</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹100</div>
         <img src="https://i.imgur.com/k1JpKQZ.jpg" alt="Fresh Lime Soda">
         <div class="product-name">Fresh Lime Soda</div>
         <button class="btn-add">Add to Cart</button>
@@ -81,18 +125,55 @@
 
     <div class="col-md-3 col-sm-6">
       <div class="product-card">
-        <div class="price-tag">₹150</div>
-        <img src="https://i.imgur.com/0o8uF3y.jpg" alt="Cappuccino">
-        <div class="product-name">Cappuccino</div>
+        <div class="price-tag">₹180</div>
+        <img src="https://i.imgur.com/T5tLxmw.jpg" alt="Fresh Juice">
+        <div class="product-name">Fresh Juice</div>
         <button class="btn-add">Add to Cart</button>
       </div>
     </div>
 
     <div class="col-md-3 col-sm-6">
       <div class="product-card">
-        <div class="price-tag">₹180</div>
-        <img src="https://i.imgur.com/kK3vw9O.jpg" alt="Orange Mojito">
-        <div class="product-name">Orange Mojito</div>
+        <div class="price-tag">₹90</div>
+        <img src="https://i.imgur.com/lJtT1o8.jpg" alt="Lassi Sweet">
+        <div class="product-name">Lassi Sweet</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹70</div>
+        <img src="https://i.imgur.com/uf23KJ5.jpg" alt="Butter Milk">
+        <div class="product-name">Butter Milk</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹160</div>
+        <img src="https://i.imgur.com/B5K8bAQ.jpg" alt="Fruit Punch">
+        <div class="product-name">Fruit Punch</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+    <!-- Extra Items -->
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹110</div>
+        <img src="https://i.imgur.com/WcXnZmS.jpg" alt="Soft Drink">
+        <div class="product-name">Soft Drink</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹140</div>
+        <img src="https://i.imgur.com/wZ8Y0ze.jpg" alt="Green Tea">
+        <div class="product-name">Green Tea</div>
         <button class="btn-add">Add to Cart</button>
       </div>
     </div>
