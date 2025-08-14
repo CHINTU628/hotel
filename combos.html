@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Combos - Dream Velvet</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f9f9f9;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    /* Hero Section */
+    .hero {
+      background: url('https://images.unsplash.com/photo-1617196039897-3e9a67f8eae8') no-repeat center center/cover;
+      height: 40vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    .hero h1 {
+      position: relative;
+      z-index: 1;
+      font-size: 3rem;
+      font-weight: bold;
+    }
+
+    /* Product Cards */
+    .product-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      text-align: center;
+      position: relative;
+      transition: transform 0.3s;
+    }
+    .product-card:hover {
+      transform: scale(1.03);
+    }
+    .price-tag {
+      position: absolute;
+      top: 10px;
+      left: 0;
+      background: red;
+      color: white;
+      padding: 5px 15px;
+      font-weight: bold;
+      border-radius: 0 20px 20px 0;
+    }
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .product-name {
+      padding: 10px;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+    .btn-add {
+      background: #FFD700;
+      border: none;
+      padding: 8px 15px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      cursor: pointer;
+    }
+    .btn-add:hover {
+      background: #e6c200;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Hero Section -->
+<section class="hero">
+  <h1>Delicious Combos</h1>
+</section>
+
+<!-- Combos List -->
+<div class="container py-4">
+  <div class="row g-4">
+
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹499</div>
+        <img src="https://images.unsplash.com/photo-1606755962773-0f45ae0bdfd5" alt="Chicken Combo">
+        <div class="product-name">Chicken Combo</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹599</div>
+        <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092" alt="Mutton Combo">
+        <div class="product-name">Mutton Combo</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹599</div>
+        <img src="https://images.unsplash.com/photo-1598514982631-1040be6c97c3" alt="Chinese Combo Non Veg">
+        <div class="product-name">Chinese Combo Non Veg</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹499</div>
+        <img src="https://images.unsplash.com/photo-1589308078056-f04bafeb9bba" alt="Chinese Combo Veg">
+        <div class="product-name">Chinese Combo Veg</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
