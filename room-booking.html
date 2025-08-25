@@ -265,17 +265,18 @@
 
         // Handle Book Now click
         function bookRoom(type) {
-            const user = auth.currentUser; // ✅ check instantly
+            const user = auth.currentUser; // instant check
             if (user) {
-                // User is logged in → show booking form
+                // User logged in → open booking modal
                 document.getElementById("roomType").value = type;
                 const modal = new bootstrap.Modal(document.getElementById('bookingModal'));
                 modal.show();
             } else {
-                // Not logged in → redirect to login
+                // Not logged in → redirect
                 window.location.href = "login.html";
             }
         }
+
 
 
         // Handle booking form submit
