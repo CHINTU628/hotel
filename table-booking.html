@@ -172,25 +172,28 @@
     </div>
   </section>
 
-  <script>
-    document.getElementById('bookingForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      const name = document.getElementById('name').value;
-      const amount = document.getElementById('payment').value;
-      alert(`Thank you, ${name}! Your table has been booked.\nAmount Paid: ₹${amount}`);
-    });
 
-    function cancelBooking() {
-      const name = document.getElementById('name').value;
-      const amount = document.getElementById('payment').value;
-      if (!name || !amount) {
-        alert("Please fill in your booking details first!");
-      } else {
-        alert(`Dear ${name}, your booking has been cancelled.\n₹${amount} will be refunded to your account.`);
-        document.getElementById('bookingForm').reset();
-      }
+
+<script>
+  document.getElementById('bookingForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const amount = document.getElementById('payment').value;
+    alert(`Thank you, ${name}! Your table has been booked.\nAmount Paid: ₹${amount}`);
+  });
+
+  function cancelBooking() {
+    const name = document.getElementById('name').value;
+    const amount = document.getElementById('payment').value;
+    if (!name || !amount) {
+      alert("Please fill in your booking details first!");
+    } else {
+      alert(`Dear ${name}, your booking has been cancelled.\n₹${amount} will be refunded to your account within 24 hours.`);
+      document.getElementById('bookingForm').reset();
     }
-  </script>
+  }
+</script>
+
 
 </body>
 
