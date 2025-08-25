@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Non-Veg Dishes - Dream Velvet</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f9f9f9;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    /* Hero Section */
+    .hero {
+      background: url('https://images.unsplash.com/photo-1604908554063-4b16c5f2df21') no-repeat center center/cover;
+      height: 40vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    .hero h1 {
+      position: relative;
+      z-index: 1;
+      font-size: 3rem;
+      font-weight: bold;
+    }
+
+    /* Product Cards */
+    .product-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      text-align: center;
+      position: relative;
+      transition: transform 0.3s;
+    }
+    .product-card:hover {
+      transform: scale(1.03);
+    }
+    .price-tag {
+      position: absolute;
+      top: 10px;
+      left: 0;
+      background: #dc3545; /* red for non-veg */
+      color: white;
+      padding: 5px 15px;
+      font-weight: bold;
+      border-radius: 0 20px 20px 0;
+    }
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .product-name {
+      padding: 10px;
+      font-weight: bold;
+      font-size: 1.05rem;
+    }
+    .btn-add {
+      background: #FFD700;
+      border: none;
+      padding: 8px 15px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      cursor: pointer;
+    }
+    .btn-add:hover {
+      background: #e6c200;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Hero Section -->
+<section class="hero">
+  <h1>Non‑Veg Specials</h1>
+</section>
+
+<!-- Non-Veg Dishes List -->
+<div class="container py-4">
+  <div class="row g-4">
+
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹299</div>
+        <img src="https://images.unsplash.com/photo-1604908177522-432a9bc01cbe" alt="Chicken Chettinad (Bone)">
+        <div class="product-name">Chicken Chettinad (Bone)</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹279</div>
+        <img src="https://images.unsplash.com/photo-1625944528533-5fbe7e52c44b" alt="Andhra Kodi Kura (Bone)">
+        <div class="product-name">Andhra Kodi Kura (Bone)</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹169</div>
+        <img src="https://images.unsplash.com/photo-1617191518318-1921c3275712" alt="Egg Bhurchi">
+        <div class="product-name">Egg Bhurchi</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹289</div>
+        <img src="https://images.unsplash.com/photo-1582456891925-24275683aa2d" alt="Fish Curry">
+        <div class="product-name">Fish Curry</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹329</div>
+        <img src="https://images.unsplash.com/photo-1612874743521-fd4b46111a0b" alt="Mutton Masala (Bone)">
+        <div class="product-name">Mutton Masala (Bone)</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹339</div>
+        <img src="https://images.unsplash.com/photo-1601050690597-df56d294f2ac" alt="Gongura Prawns">
+        <div class="product-name">Gongura Prawns</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹309</div>
+        <img src="https://images.unsplash.com/photo-1625944528856-7b8baf476f3a" alt="Chicken Nawabi">
+        <div class="product-name">Chicken Nawabi</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹279</div>
+        <img src="https://images.unsplash.com/photo-1604908553754-2b0c0e2cdc6f" alt="Masala Fish Fry">
+        <div class="product-name">Masala Fish Fry</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="product-card">
+        <div class="price-tag">₹329</div>
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947" alt="Royyala Iguru">
+        <div class="product-name">Royyala Iguru</div>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
