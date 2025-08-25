@@ -265,16 +265,18 @@
 
         // Handle Book Now click
         function bookRoom(type) {
-            auth.onAuthStateChanged(user => {
-                if (user) {
-                    document.getElementById("roomType").value = type;
-                    const modal = new bootstrap.Modal(document.getElementById('bookingModal'));
-                    modal.show();
-                } else {
-                    window.location.href = "login.html";
-                }
-            });
+            const user = auth.currentUser; // ✅ check instantly
+            if (user) {
+                // User is logged in → show booking form
+                document.getElementById("roomType").value = type;
+                const modal = new bootstrap.Modal(document.getElementById('bookingModal'));
+                modal.show();
+            } else {
+                // Not logged in → redirect to login
+                window.location.href = "login.html";
+            }
         }
+
 
         // Handle booking form submit
         document.getElementById("roomBookingForm").addEventListener("submit", async (e) => {
