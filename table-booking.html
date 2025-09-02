@@ -122,43 +122,56 @@
   </section>
 
   <!-- Booking Form -->
-  <section class="booking-section">
-    <h2>Reserve Your Table</h2>
-    <form id="bookingForm">
-      <div class="mb-3">
-        <label for="name" class="form-label">Full Name</label>
-        <input type="text" id="name" class="form-control" required>
+  <form id="tableBookingForm">
+    <div class="mb-3">
+      <label for="name" class="form-label">Full Name</label>
+      <input type="text" id="name" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="tableType" class="form-label">Table Type</label>
+      <select id="tableType" class="form-select" required>
+        <option value="">Select Table Type</option>
+        <option>Luxury</option>
+        <option>Deluxe</option>
+        <option>Outdoor</option>
+        <option>Romantic</option>
+      </select>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="date" class="form-label">Booking Date</label>
+        <input type="date" id="date" class="form-control" required>
       </div>
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label for="date" class="form-label">Booking Date</label>
-          <input type="date" id="date" class="form-control" required>
-        </div>
-        <div class="col-md-6 mb-3">
-          <label for="time" class="form-label">Time</label>
-          <input type="time" id="time" class="form-control" required>
-        </div>
+      <div class="col-md-6 mb-3">
+        <label for="time" class="form-label">Time</label>
+        <input type="time" id="time" class="form-control" required>
       </div>
-      <div class="mb-3">
-        <label for="guests" class="form-label">Number of Guests</label>
-        <select id="guests" class="form-select" required>
-          <option value="">Select</option>
-          <option>2</option>
-          <option>4</option>
-          <option>6</option>
-          <option>8+</option>
-        </select>
-      </div>
-      <div class="mb-3">
-        <label for="payment" class="form-label">Advance Payment (₹)</label>
-        <input type="number" id="payment" class="form-control" required>
-      </div>
-      <div class="d-flex gap-2">
-        <button type="submit" class="btn btn-primary w-50">Book Now</button>
-        <button type="button" onclick="cancelBooking()" class="btn btn-outline-danger w-50">Cancel Booking</button>
-      </div>
-    </form>
-  </section>
+    </div>
+
+    <div class="mb-3">
+      <label for="guests" class="form-label">Number of Guests</label>
+      <select id="guests" class="form-select" required>
+        <option value="">Select</option>
+        <option>2</option>
+        <option>4</option>
+        <option>6</option>
+        <option>8+</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="payment" class="form-label">Advance Payment (₹)</label>
+      <input type="number" id="payment" class="form-control" required>
+    </div>
+
+    <div class="d-flex gap-2">
+      <button type="submit" class="btn btn-primary w-50">Book Now</button>
+      <button type="button" onclick="cancelBooking()" class="btn btn-outline-danger w-50">Cancel Booking</button>
+    </div>
+  </form>
+
 
   <!-- Gallery -->
   <section class="container gallery">
@@ -171,27 +184,87 @@
     </div>
   </section>
 
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore-compat.js"></script>
 
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAT80QXTEwAgGnOB6N1lzpH-vdc98LoPfQ",
+      authDomain: "dreamvelvet-377e0.firebaseapp.com",
+      projectId: "dreamvelvet-377e0",
+      storageBucket: "dreamvelvet-377e0.appspot.com",
+      messagingSenderId: "821302105933",
+      appId: "1:821302105933:web:bada4e32794a5fa35b8904"
+    };
 
-<script>
-  document.getElementById('bookingForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-    const name = document.getElementById('name').value;
-    const amount = document.getElementById('payment').value;
-    alert(`Thank you, ${name}! Your table has been booked.\nAmount Paid: ₹${amount}`);
-  });
-
-  function cancelBooking() {
-    const name = document.getElementById('name').value;
-    const amount = document.getElementById('payment').value;
-    if (!name || !amount) {
-      alert("Please fill in your booking details first!");
-    } else {
-      alert(`Dear ${name}, your booking has been cancelled.\n₹${amount} will be refunded to your account within 24 hours.`);
-      document.getElementById('bookingForm').reset();
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
     }
-  }
-</script>
+
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // Table Booking Submit
+    document.getElementById('tableBookingForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const user = auth.currentUser;
+      if (!user) {
+        alert("Please login to book a table.");
+        return;
+      }
+
+      const bookingData = {
+        userId: user.uid,
+        userEmail: user.email,
+        name: document.getElementById('name').value,
+        tableType: document.getElementById('tableType').value,
+        date: document.getElementById('date').value,
+        time: document.getElementById('time').value,
+        guests: document.getElementById('guests').value,
+        payment: document.getElementById('payment').value,
+        status: "Confirmed",
+        createdAt: new Date().toISOString()
+      };
+
+      try {
+        await db.collection("tableBookings").add(bookingData);
+        alert("✅ Table booked successfully!");
+        document.getElementById("tableBookingForm").reset();
+      } catch (error) {
+        console.error("Error booking table:", error);
+        alert("Something went wrong. Please try again.");
+      }
+    });
+
+    function cancelBooking() {
+      alert("Booking cancelled (demo). In real app, you can update status in Firestore.");
+      document.getElementById("tableBookingForm").reset();
+    }
+  </script>
+
+
+  <script>
+    document.getElementById('bookingForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const amount = document.getElementById('payment').value;
+      alert(`Thank you, ${name}! Your table has been booked.\nAmount Paid: ₹${amount}`);
+    });
+
+    function cancelBooking() {
+      const name = document.getElementById('name').value;
+      const amount = document.getElementById('payment').value;
+      if (!name || !amount) {
+        alert("Please fill in your booking details first!");
+      } else {
+        alert(`Dear ${name}, your booking has been cancelled.\n₹${amount} will be refunded to your account within 24 hours.`);
+        document.getElementById('bookingForm').reset();
+      }
+    }
+  </script>
 
 
 </body>
