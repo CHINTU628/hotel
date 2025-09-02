@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>User Dashboard - Dream Velvet</title>
   <style>
     body {
@@ -35,7 +36,7 @@
       padding: 1em;
       background: white;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
     h2 {
@@ -63,7 +64,7 @@
       padding: 1em;
       border-radius: 10px;
       text-align: center;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
     }
 
     .card h3 {
@@ -99,98 +100,158 @@
     }
   </style>
 </head>
+
 <body>
 
-<header>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="services.html">Services</a>
-    <a href="room-booking.html">Rooms</a>
-    <a href="table-booking.html">Table</a>
-  </nav>
-</header>
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="room-booking.html">Rooms</a>
+      <a href="table-booking.html">Table</a>
+    </nav>
+  </header>
 
-<div class="dashboard">
-  <h2>Hello, <span id="userName">Guest</span> 👋</h2>
-  <p class="user-info">Email: <span id="userEmail">loading...</span><br>
-     Phone: <span id="userPhone">loading...</span>
-  </p>
+  <div class="dashboard">
+    <h2>Hello, <span id="userName">Guest</span> 👋</h2>
+    <p class="user-info">Email: <span id="userEmail">loading...</span><br>
+      Phone: <span id="userPhone">loading...</span>
+    </p>
 
-  <div class="card-container">
-    <div class="card">
-      <h3>Book a Room</h3>
-      <p>Explore our Luxury, Deluxe, and Standard rooms.</p>
-      <button onclick="location.href='room-booking.html'">Book Now</button>
+    <div class="card-container">
+      <div class="card">
+        <h3>Book a Room</h3>
+        <p>Explore our Luxury, Deluxe, and Standard rooms.</p>
+        <button onclick="location.href='room-booking.html'">Book Now</button>
+      </div>
+      <div class="card">
+        <h3>Table Reservation</h3>
+        <p>Reserve a table in our 5-star restaurant.</p>
+        <button onclick="location.href='table-booking.html'">Reserve</button>
+      </div>
+      <div class="card">
+        <h3>View Profile</h3>
+        <p>Check and update your personal information.</p>
+        <button onclick="location.href='profile.html'">My Profile</button>
+      </div>
     </div>
-    <div class="card">
-      <h3>Table Reservation</h3>
-      <p>Reserve a table in our 5-star restaurant.</p>
-      <button onclick="location.href='table-booking.html'">Reserve</button>
+
+    <div class="booking-history">
+      <h2>Your Room Booking History</h2>
+      <table id="bookingTable" border="1" cellpadding="10"
+        style="width:100%; border-collapse:collapse; margin-top:20px;">
+        <thead>
+          <tr style="background:#007bff; color:white;">
+            <th>Room Type</th>
+            <th>Check-in</th>
+            <th>Check-out</th>
+            <th>Guests</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="bookingList">
+          <tr>
+            <td colspan="5" style="text-align:center;">Loading...</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="card">
-      <h3>View Profile</h3>
-      <p>Check and update your personal information.</p>
-      <button onclick="location.href='profile.html'">My Profile</button>
+
+
+    <div class="logout">
+      <button onclick="logoutUser()">Logout</button>
     </div>
   </div>
 
-  <div class="logout">
-    <button onclick="logoutUser()">Logout</button>
-  </div>
-</div>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore-compat.js"></script>
 
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAT80QXTEwAgGnOB6N1lzpH-vdc98LoPfQ",
+      authDomain: "dreamvelvet-377e0.firebaseapp.com",
+      projectId: "dreamvelvet-377e0",
+      storageBucket: "dreamvelvet-377e0.appspot.com",
+      messagingSenderId: "821302105933",
+      appId: "1:821302105933:web:bada4e32794a5fa35b8904"
+    };
 
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyAT80QXTEwAgGnOB6N1lzpH-vdc98LoPfQ",
-    authDomain: "dreamvelvet-377e0.firebaseapp.com",
-    projectId: "dreamvelvet-377e0",
-    storageBucket: "dreamvelvet-377e0.appspot.com",
-    messagingSenderId: "821302105933",
-    appId: "1:821302105933:web:bada4e32794a5fa35b8904"
-  };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
 
-  firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-  const db = firebase.firestore();
+    auth.onAuthStateChanged(async user => {
+      if (user) {
+        document.getElementById("userEmail").textContent = user.email;
 
-  auth.onAuthStateChanged(async user => {
-    if (user) {
-      document.getElementById("userEmail").textContent = user.email;
+        try {
+          const doc = await db.collection("users").doc(user.uid).get();
+          if (doc.exists) {
+            const data = doc.data();
+            document.getElementById("userName").textContent = data.name || user.displayName || "User";
+            document.getElementById("userPhone").textContent = data.phone || "Not Provided";
+          } else {
+            document.getElementById("userName").textContent = user.displayName || "User";
+            document.getElementById("userPhone").textContent = "Not Available";
+          }
+        } catch (error) {
+          console.error("Error fetching user info:", error);
+          document.getElementById("userName").textContent = user.displayName || "User";
+          document.getElementById("userPhone").textContent = "Error";
+        }
+        loadBookings(user.uid); // 🔥 booking history fetch
+
+      } else {
+        window.location.href = "login.html"; // Redirect if not logged in
+      }
+    });
+
+    function logoutUser() {
+      auth.signOut().then(() => {
+        localStorage.removeItem("isLoggedIn"); // ✅ Clear login flag
+        window.location.href = "login.html";
+      });
+    }
+
+    async function loadBookings(userId) {
+      const bookingList = document.getElementById("bookingList");
+      bookingList.innerHTML = "<tr><td colspan='5' style='text-align:center;'>Loading...</td></tr>";
 
       try {
-        const doc = await db.collection("users").doc(user.uid).get();
-        if (doc.exists) {
-          const data = doc.data();
-          document.getElementById("userName").textContent = data.name || user.displayName || "User";
-          document.getElementById("userPhone").textContent = data.phone || "Not Provided";
-        } else {
-          document.getElementById("userName").textContent = user.displayName || "User";
-          document.getElementById("userPhone").textContent = "Not Available";
+        const snapshot = await db.collection("roomBookings")
+          .where("userId", "==", userId)
+          .orderBy("createdAt", "desc")
+          .get();
+
+        if (snapshot.empty) {
+          bookingList.innerHTML = "<tr><td colspan='5' style='text-align:center;'>No bookings yet.</td></tr>";
+          return;
         }
+
+        bookingList.innerHTML = "";
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          const row = `
+        <tr>
+          <td>${data.roomType}</td>
+          <td>${data.checkIn}</td>
+          <td>${data.checkOut}</td>
+          <td>${data.guests}</td>
+          <td>${data.status}</td>
+        </tr>`;
+          bookingList.innerHTML += row;
+        });
       } catch (error) {
-        console.error("Error fetching user info:", error);
-        document.getElementById("userName").textContent = user.displayName || "User";
-        document.getElementById("userPhone").textContent = "Error";
+        console.error("Error fetching bookings:", error);
+        bookingList.innerHTML = "<tr><td colspan='5' style='text-align:center;color:red;'>Error loading bookings</td></tr>";
       }
-
-    } else {
-      window.location.href = "login.html"; // Redirect if not logged in
     }
-  });
 
-  function logoutUser() {
-    auth.signOut().then(() => {
-      localStorage.removeItem("isLoggedIn"); // ✅ Clear login flag
-      window.location.href = "login.html";
-    });
-  }
-</script>
+  </script>
 
 </body>
+
 </html>
