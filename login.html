@@ -149,6 +149,7 @@
     });
 
     // Login
+    // Login
     document.getElementById("loginForm").addEventListener("submit", async (e) => {
       e.preventDefault();
       const email = document.getElementById("loginEmail").value;
@@ -159,6 +160,10 @@
         const doc = await db.collection("users").doc(userCred.user.uid).get();
         if (doc.exists) {
           const role = doc.data().role || "user";
+
+          // 🔥 Save login flag
+          localStorage.setItem("isLoggedIn", "true");
+
           if (role === "admin") {
             window.location.href = "admin-dashboard.html";
           } else {
@@ -171,6 +176,7 @@
         alert("Login Failed: " + err.message);
       }
     });
+
   </script>
 
 </body>
