@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | Dream Velvet</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f8f9fa;
+    }
+
+    .sidebar {
+      width: 220px;
+      background: #2c3e50;
+      color: white;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 20px 10px;
+    }
+
+    .sidebar h3 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: bold;
+    }
+
+    .sidebar a {
+      display: block;
+      color: white;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      text-decoration: none;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background: #800080;
+    }
+
+    .main {
+      margin-left: 240px;
+      padding: 20px;
+    }
+
+    .card {
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th {
+      background: #800080;
+      color: white;
+    }
+
+    td,
+    th {
+      padding: 10px;
+      border: 1px solid #ddd;
+    }
+
+    .status-pending {
+      color: orange;
+      font-weight: bold;
+    }
+
+    .status-confirmed {
+      color: green;
+      font-weight: bold;
+    }
+
+    .status-cancelled {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h3>Dream Velvet</h3>
+    <a href="#" class="active" onclick="showSection('overview')"><i class="fa fa-chart-line"></i> Overview</a>
+    <a href="#" onclick="showSection('rooms')"><i class="fa fa-bed"></i> Room Bookings</a>
+    <a href="#" onclick="showSection('tables')"><i class="fa fa-utensils"></i> Table Bookings</a>
+    <a href="#" onclick="showSection('users')"><i class="fa fa-users"></i> Users</a>
+    <a href="#" onclick="logout()"><i class="fa fa-sign-out-alt"></i> Logout</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <!-- Overview -->
+    <div id="overviewSection">
+      <h2>Admin Dashboard</h2>
+      <div class="row mt-4">
+        <div class="col-md-4">
+          <div class="card p-3 text-center">
+            <h4>Total Users</h4>
+            <h2 id="statUsers">0</h2>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card p-3 text-center">
+            <h4>Rooms Booked</h4>
+            <h2 id="statRooms">0</h2>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card p-3 text-center">
+            <h4>Tables Reserved</h4>
+            <h2 id="statTables">0</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-5">
+        <h3>Bookings Calendar</h3>
+        <div id="calendar"></div>
+      </div>
+    </div>
+
+    <!-- Room Bookings -->
+    <div id="roomsSection" style="display:none;">
+      <h2>Room Bookings</h2>
+      <table class="mt-3">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Room Type</th>
+            <th>Room No</th>
+            <th>Check-in</th>
+            <th>Check-out</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="roomBookings"></tbody>
+      </table>
+    </div>
+
+    <!-- Table Bookings -->
+    <div id="tablesSection" style="display:none;">
+      <h2>Table Bookings</h2>
+      <table class="mt-3">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Table Type</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Guests</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="tableBookings"></tbody>
+      </table>
+    </div>
+
+    <!-- Users -->
+    <div id="usersSection" style="display:none;">
+      <h2>Users</h2>
+      <table class="mt-3">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody id="usersList"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAT80QXTEwAgGnOB6N1lzpH-vdc98LoPfQ",
+      authDomain: "dreamvelvet-377e0.firebaseapp.com",
+      projectId: "dreamvelvet-377e0",
+      storageBucket: "dreamvelvet-377e0.appspot.com",
+      messagingSenderId: "821302105933",
+      appId: "1:821302105933:web:bada4e32794a5fa35b8904"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // Check if admin
+    auth.onAuthStateChanged(async user => {
+      if (!user) {
+        window.location.href = "login.html";
+        return;
+      }
+      const doc = await db.collection("users").doc(user.uid).get();
+      if (!doc.exists || doc.data().role !== "admin") {
+        alert("Access denied!");
+        window.location.href = "userdashboard.html";
+      } else {
+        loadStats();
+        loadBookings();
+        loadUsers();
+      }
+    });
+
+    // Load Stats
+    async function loadStats() {
+      const usersSnap = await db.collection("users").get();
+      document.getElementById("statUsers").innerText = usersSnap.size;
+
+      const roomsSnap = await db.collection("roomBookings").get();
+      document.getElementById("statRooms").innerText = roomsSnap.size;
+
+      const tablesSnap = await db.collection("tableBookings").get();
+      document.getElementById("statTables").innerText = tablesSnap.size;
+    }
+
+    // Load Bookings
+    async function loadBookings() {
+      const roomBody = document.getElementById("roomBookings");
+      const tableBody = document.getElementById("tableBookings");
+      const calendarEl = document.getElementById("calendar");
+      let events = [];
+
+      // Rooms
+      const roomSnap = await db.collection("roomBookings").get();
+      roomBody.innerHTML = "";
+      roomSnap.forEach(doc => {
+        const d = doc.data();
+        roomBody.innerHTML += `
+          <tr>
+            <td>${d.userEmail}</td>
+            <td>${d.roomType}</td>
+            <td>${d.roomNumber || '-'}</td>
+            <td>${d.checkIn}</td>
+            <td>${d.checkOut}</td>
+            <td class="status-${d.status.toLowerCase()}">${d.status}</td>
+            <td>
+              <button class="btn btn-sm btn-success" onclick="updateStatus('roomBookings','${doc.id}','Confirmed')">Approve</button>
+              <button class="btn btn-sm btn-danger" onclick="updateStatus('roomBookings','${doc.id}','Cancelled')">Reject</button>
+            </td>
+          </tr>`;
+        events.push({ title: `${d.roomType} (${d.userEmail})`, start: d.checkIn, end: d.checkOut, color: "purple" });
+      });
+
+      // Tables
+      const tableSnap = await db.collection("tableBookings").get();
+      tableBody.innerHTML = "";
+      tableSnap.forEach(doc => {
+        const d = doc.data();
+        tableBody.innerHTML += `
+          <tr>
+            <td>${d.userEmail}</td>
+            <td>${d.tableType}</td>
+            <td>${d.date}</td>
+            <td>${d.time}</td>
+            <td>${d.guests}</td>
+            <td class="status-${d.status.toLowerCase()}">${d.status}</td>
+            <td>
+              <button class="btn btn-sm btn-success" onclick="updateStatus('tableBookings','${doc.id}','Confirmed')">Approve</button>
+              <button class="btn btn-sm btn-danger" onclick="updateStatus('tableBookings','${doc.id}','Cancelled')">Reject</button>
+            </td>
+          </tr>`;
+        events.push({ title: `${d.tableType} (${d.userEmail})`, start: d.date, color: "orange" });
+      });
+
+      // Render Calendar
+      let calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        events: events
+      });
+      calendar.render();
+    }
+
+    // Load Users
+    async function loadUsers() {
+      const userBody = document.getElementById("usersList");
+      const usersSnap = await db.collection("users").get();
+      userBody.innerHTML = "";
+      usersSnap.forEach(doc => {
+        const d = doc.data();
+        userBody.innerHTML += `
+          <tr>
+            <td>${d.name || '-'}</td>
+            <td>${d.email}</td>
+            <td>${d.phone || '-'}</td>
+            <td>${d.role}</td>
+          </tr>`;
+      });
+    }
+
+    // Update Status
+    async function updateStatus(collection, id, status) {
+      await db.collection(collection).doc(id).update({ status });
+      alert("Status updated!");
+      loadBookings();
+    }
+
+    // Show section
+    function showSection(section) {
+      document.getElementById("overviewSection").style.display = section === "overview" ? "block" : "none";
+      document.getElementById("roomsSection").style.display = section === "rooms" ? "block" : "none";
+      document.getElementById("tablesSection").style.display = section === "tables" ? "block" : "none";
+      document.getElementById("usersSection").style.display = section === "users" ? "block" : "none";
+    }
+
+    // Logout
+    function logout() {
+      auth.signOut().then(() => {
+        window.location.href = "login.html";
+      });
+    }
+  </script>
+</body>
+
+</html>
