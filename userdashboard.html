@@ -235,7 +235,7 @@
     function logoutUser() {
       auth.signOut().then(() => {
         localStorage.removeItem("isLoggedIn"); // ✅ Clear login flag
-        window.location.href = "login.html";
+        window.location.href = "index.html";
       });
     }
 
