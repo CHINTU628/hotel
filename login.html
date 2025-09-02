@@ -1,100 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dream Velvet - Login / Signup</title>
+  <title>Login | Dream Velvet</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f0f2f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f8f9fa;
     }
 
-    .container {
-      background: #fff;
-      padding: 2em;
+    .auth-container {
+      max-width: 450px;
+      margin: 80px auto;
+      background: white;
+      padding: 30px;
       border-radius: 10px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-      width: 320px;
     }
 
-    h2 {
+    .auth-container h2 {
       text-align: center;
-      margin-bottom: 1em;
+      margin-bottom: 20px;
+      font-weight: bold;
+      color: #800080;
     }
 
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #0056b3;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    #toggleText {
+    .toggle-link {
       text-align: center;
       margin-top: 15px;
     }
 
-    #toggleText a {
-      color: #007bff;
+    .toggle-link a {
+      color: #800080;
       cursor: pointer;
-      text-decoration: none;
-    }
-
-    #message {
-      text-align: center;
-      margin-top: 10px;
-      color: red;
+      font-weight: bold;
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
+  <div class="auth-container">
     <h2 id="formTitle">Login</h2>
-    <form id="authForm">
-      <input type="text" id="name" placeholder="Full Name" class="hidden" />
-      <input type="tel" id="phone" placeholder="Phone Number" class="hidden" />
-      <input type="email" id="email" placeholder="Email" required />
-      <input type="password" id="password" placeholder="Password" required />
-      <button type="submit" id="submitBtn">Login</button>
+
+    <!-- Login Form -->
+    <form id="loginForm">
+      <div class="mb-3">
+        <label>Email</label>
+        <input type="email" id="loginEmail" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label>Password</label>
+        <input type="password" id="loginPassword" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Login</button>
     </form>
-    <p id="toggleText">Don't have an account? <a id="toggleLink">Sign up</a></p>
-    <p id="message"></p>
+
+    <!-- Signup Form -->
+    <form id="signupForm" style="display:none;">
+      <div class="mb-3">
+        <label>Full Name</label>
+        <input type="text" id="signupName" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label>Email</label>
+        <input type="email" id="signupEmail" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label>Password</label>
+        <input type="password" id="signupPassword" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label>Phone</label>
+        <input type="text" id="signupPhone" class="form-control">
+      </div>
+      <button type="submit" class="btn btn-success w-100">Sign Up</button>
+    </form>
+
+    <!-- Toggle -->
+    <div class="toggle-link">
+      <p id="toggleText">Don’t have an account? <a onclick="toggleForms()">Sign Up</a></p>
+    </div>
   </div>
 
-  <!-- Firebase SDKs -->
+  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore-compat.js"></script>
 
   <script>
-    // Firebase Config
     const firebaseConfig = {
       apiKey: "AIzaSyAT80QXTEwAgGnOB6N1lzpH-vdc98LoPfQ",
       authDomain: "dreamvelvet-377e0.firebaseapp.com",
@@ -108,77 +104,75 @@
     const auth = firebase.auth();
     const db = firebase.firestore();
 
-    const form = document.getElementById("authForm");
-    const formTitle = document.getElementById("formTitle");
-    const nameField = document.getElementById("name");
-    const phoneField = document.getElementById("phone");
-    const emailField = document.getElementById("email");
-    const passwordField = document.getElementById("password");
-    const submitBtn = document.getElementById("submitBtn");
-    const message = document.getElementById("message");
-    const toggleText = document.getElementById("toggleText");
+    // Toggle forms
+    function toggleForms() {
+      const loginForm = document.getElementById("loginForm");
+      const signupForm = document.getElementById("signupForm");
+      const title = document.getElementById("formTitle");
+      const toggleText = document.getElementById("toggleText");
 
-    let isLogin = true;
-
-    // Toggle between Login and Signup
-    function updateFormMode() {
-      isLogin = !isLogin;
-
-      formTitle.textContent = isLogin ? "Login" : "Sign Up";
-      submitBtn.textContent = isLogin ? "Login" : "Sign Up";
-      nameField.classList.toggle("hidden", isLogin);
-      phoneField.classList.toggle("hidden", isLogin);
-
-      toggleText.innerHTML = isLogin
-        ? `Don't have an account? <a id="toggleLink">Sign up</a>`
-        : `Already have an account? <a id="toggleLink">Login</a>`;
-
-      document.getElementById("toggleLink").addEventListener("click", updateFormMode);
+      if (loginForm.style.display === "none") {
+        loginForm.style.display = "block";
+        signupForm.style.display = "none";
+        title.innerText = "Login";
+        toggleText.innerHTML = `Don’t have an account? <a onclick="toggleForms()">Sign Up</a>`;
+      } else {
+        loginForm.style.display = "none";
+        signupForm.style.display = "block";
+        title.innerText = "Sign Up";
+        toggleText.innerHTML = `Already have an account? <a onclick="toggleForms()">Login</a>`;
+      }
     }
 
-    document.getElementById("toggleLink").addEventListener("click", updateFormMode);
-
-    // Form Submit Handler
-    form.addEventListener("submit", async (e) => {
+    // Sign Up
+    document.getElementById("signupForm").addEventListener("submit", async (e) => {
       e.preventDefault();
-
-      const email = emailField.value.trim();
-      const password = passwordField.value;
-      const name = nameField.value.trim();
-      const phone = phoneField.value.trim();
-      message.textContent = "";
+      const name = document.getElementById("signupName").value;
+      const email = document.getElementById("signupEmail").value;
+      const password = document.getElementById("signupPassword").value;
+      const phone = document.getElementById("signupPhone").value;
 
       try {
-        if (isLogin) {
-          await auth.signInWithEmailAndPassword(email, password);
-          
-          // ✅ Set login status in localStorage
-          localStorage.setItem("isLoggedIn", "true");
+        const userCred = await auth.createUserWithEmailAndPassword(email, password);
+        await db.collection("users").doc(userCred.user.uid).set({
+          name,
+          email,
+          phone,
+          role: "user", // default role
+          createdAt: new Date().toISOString()
+        });
+        alert("✅ Signup successful! Please login.");
+        toggleForms();
+      } catch (err) {
+        alert("Error: " + err.message);
+      }
+    });
 
-          message.style.color = "green";
-          message.textContent = "Login successful!";
-          setTimeout(() => {
-            window.location.href = "index.html";
-          }, 1000);
+    // Login
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("loginEmail").value;
+      const password = document.getElementById("loginPassword").value;
+
+      try {
+        const userCred = await auth.signInWithEmailAndPassword(email, password);
+        const doc = await db.collection("users").doc(userCred.user.uid).get();
+        if (doc.exists) {
+          const role = doc.data().role || "user";
+          if (role === "admin") {
+            window.location.href = "admin-dashboard.html";
+          } else {
+            window.location.href = "userdashboard.html";
+          }
         } else {
-          const result = await auth.createUserWithEmailAndPassword(email, password);
-          await result.user.updateProfile({ displayName: name });
-
-          // Store user profile in Firestore
-          await db.collection("users").doc(result.user.uid).set({
-            name: name,
-            phone: phone,
-            email: email
-          });
-
-          message.style.color = "green";
-          message.textContent = "Signup successful!";
+          alert("⚠️ User data not found!");
         }
       } catch (err) {
-        message.style.color = "red";
-        message.textContent = err.message;
+        alert("Login Failed: " + err.message);
       }
     });
   </script>
+
 </body>
+
 </html>
