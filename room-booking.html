@@ -276,8 +276,9 @@
         checkOut: document.getElementById("checkOut").value,
         guests: document.getElementById("guests").value,
         status: "Pending",
-        createdAt: new Date()
+        createdAt: new Date().toISOString() // ✅ ISO string save chestunnam
       };
+
 
       try {
         const docRef = await db.collection("roomBookings").add(bookingData);
@@ -293,4 +294,5 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
