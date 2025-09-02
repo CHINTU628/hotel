@@ -111,6 +111,7 @@
           <li class="nav-item"><a href="room-booking.html" class="nav-link">Rooms</a></li>
           <li class="nav-item"><a href="table-booking.html" class="nav-link active">Table</a></li>
           <li class="nav-item"><a href="ordernow.html" class="nav-link">Order Now</a></li>
+          <li class="nav-item"><a id="login-nav" href="login.html" class="nav-link">Login</a></li>
         </ul>
       </div>
     </div>
@@ -312,6 +313,21 @@
       } else {
         alert(`Dear ${name}, your booking has been cancelled.\n₹${amount} will be refunded to your account within 24 hours.`);
         document.getElementById('bookingForm').reset();
+      }
+    }
+  </script>
+
+  <script>
+    window.onload = function () {
+      const isLoggedIn = localStorage.getItem("isLoggedIn");
+      const loginNav = document.getElementById("login-nav");
+
+      if (isLoggedIn === "true") {
+        loginNav.innerText = "User Dashboard";
+        loginNav.href = "userdashboard.html";
+      } else {
+        loginNav.innerText = "Login";
+        loginNav.href = "login.html";
       }
     }
   </script>
