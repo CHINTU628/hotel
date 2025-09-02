@@ -271,6 +271,7 @@
             let events = [];
 
             // Rooms
+            // Rooms
             const roomSnap = await db.collection("roomBookings").get();
             roomBody.innerHTML = "";
             roomSnap.forEach(doc => {
@@ -288,13 +289,18 @@
           <button class="btn btn-sm btn-danger" onclick="updateStatus('roomBookings','${doc.id}','Cancelled')">Reject</button>
         </td>
       </tr>`;
-                events.push({
-                    title: `${d.roomType} (${d.userEmail})`,
-                    start: d.checkIn,
-                    end: d.checkOut,
-                    color: "#6f42c1" // neat purple
-                });
+
+                // ✅ Only add confirmed bookings to calendar
+                if (d.status === "Confirmed") {
+                    events.push({
+                        title: `${d.roomType} (${d.userEmail})`,
+                        start: d.checkIn,
+                        end: d.checkOut,
+                        color: "#6f42c1" // purple
+                    });
+                }
             });
+
 
             // Tables (only list, no calendar events)
             const tableSnap = await db.collection("tableBookings").get();
