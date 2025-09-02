@@ -249,6 +249,13 @@
     const auth = firebase.auth();
     const db = firebase.firestore();
 
+    // Available room counts
+    const roomLimits = {
+      "Standard": 6,
+      "Deluxe": 6,
+      "Luxury": 8
+    };
+
     function bookRoom(type) {
       const user = auth.currentUser;
       if (user) {
@@ -268,29 +275,69 @@
         return;
       }
 
-      const bookingData = {
-        userId: user.uid,
-        userEmail: user.email,
-        roomType: document.getElementById("roomType").value,
-        checkIn: document.getElementById("checkIn").value,
-        checkOut: document.getElementById("checkOut").value,
-        guests: document.getElementById("guests").value,
-        status: "Pending",
-        createdAt: new Date().toISOString() // ✅ ISO string save chestunnam
-      };
-
+      const roomType = document.getElementById("roomType").value;
+      const checkIn = document.getElementById("checkIn").value;
+      const checkOut = document.getElementById("checkOut").value;
+      const guests = document.getElementById("guests").value;
 
       try {
+        // 🔍 Check existing bookings for that type
+        const snapshot = await db.collection("roomBookings")
+          .where("roomType", "==", roomType)
+          .where("status", "in", ["Pending", "Confirmed"]) // consider active bookings only
+          .get();
+
+        let allocatedRooms = [];
+        snapshot.forEach(doc => {
+          const d = doc.data();
+          // simple overlap check
+          if (!(checkOut <= d.checkIn || checkIn >= d.checkOut)) {
+            if (d.roomNumber) {
+              allocatedRooms.push(d.roomNumber);
+            }
+          }
+        });
+
+        // 🔢 Find free room number
+        let assignedRoom = null;
+        for (let i = 1; i <= roomLimits[roomType]; i++) {
+          if (!allocatedRooms.includes(i)) {
+            assignedRoom = i;
+            break;
+          }
+        }
+
+        if (!assignedRoom) {
+          alert(`❌ Sorry, all ${roomType} rooms are fully booked for these dates.`);
+          return;
+        }
+
+        // ✅ Save booking
+        const bookingData = {
+          userId: user.uid,
+          userEmail: user.email,
+          roomType,
+          roomNumber: assignedRoom,
+          checkIn,
+          checkOut,
+          guests,
+          status: "Pending",
+          createdAt: new Date().toISOString()
+        };
+
         const docRef = await db.collection("roomBookings").add(bookingData);
-        alert(`Booking Confirmed! ✅\nBooking ID: ${docRef.id}`);
+        alert(`✅ Room booked successfully!\nType: ${roomType}\nRoom No: ${assignedRoom}\nBooking ID: ${docRef.id}`);
+
         document.getElementById("roomBookingForm").reset();
         bootstrap.Modal.getInstance(document.getElementById('bookingModal')).hide();
+
       } catch (error) {
         console.error("Error booking room:", error);
         alert("Something went wrong. Please try again.");
       }
     });
   </script>
+
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

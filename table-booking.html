@@ -209,6 +209,14 @@
     const auth = firebase.auth();
     const db = firebase.firestore();
 
+    // Table limits
+    const tableLimits = {
+      "Luxury": 5,
+      "Deluxe": 5,
+      "Outdoor": 3,
+      "Romantic": 2
+    };
+
     // Submit handler
     document.getElementById('tableBookingForm').addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -218,23 +226,60 @@
         return;
       }
 
-      const bookingData = {
-        userId: user.uid,
-        userEmail: user.email,
-        name: document.getElementById('name').value,
-        tableType: document.getElementById('tableType').value,
-        date: document.getElementById('date').value,
-        time: document.getElementById('time').value,
-        guests: document.getElementById('guests').value,
-        payment: document.getElementById('payment').value,
-        status: "Confirmed",
-        createdAt: new Date().toISOString()
-      };
+      const tableType = document.getElementById('tableType').value;
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('time').value;
 
       try {
+        // 🔍 check existing bookings
+        const snapshot = await db.collection("tableBookings")
+          .where("tableType", "==", tableType)
+          .where("date", "==", date)
+          .where("time", "==", time)
+          .get();
+
+        let allocatedTables = [];
+        snapshot.forEach(doc => {
+          const d = doc.data();
+          if (d.tableNumber) {
+            allocatedTables.push(d.tableNumber);
+          }
+        });
+
+        // 🔢 find free table
+        let assignedTable = null;
+        for (let i = 1; i <= tableLimits[tableType]; i++) {
+          if (!allocatedTables.includes(i)) {
+            assignedTable = i;
+            break;
+          }
+        }
+
+        if (!assignedTable) {
+          alert(`❌ Sorry, all ${tableType} tables are fully booked at this time.`);
+          return;
+        }
+
+        // ✅ Save booking
+        const bookingData = {
+          userId: user.uid,
+          userEmail: user.email,
+          name: document.getElementById('name').value,
+          tableType,
+          tableNumber: assignedTable,
+          date,
+          time,
+          guests: document.getElementById('guests').value,
+          payment: document.getElementById('payment').value,
+          status: "Confirmed",
+          createdAt: new Date().toISOString()
+        };
+
         await db.collection("tableBookings").add(bookingData);
-        alert("✅ Table booked successfully!");
+        alert(`✅ Table booked successfully!\nType: ${tableType}\nTable No: ${assignedTable}`);
+
         document.getElementById("tableBookingForm").reset();
+
       } catch (error) {
         console.error("Error booking table:", error);
         alert("Something went wrong. Please try again.");
@@ -247,6 +292,7 @@
       document.getElementById("tableBookingForm").reset();
     }
   </script>
+
 
 
 
